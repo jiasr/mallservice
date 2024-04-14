@@ -3,8 +3,11 @@ package com.us.example.controller;
 import com.us.example.bean.GoodsCatalog;
 import com.us.example.serviceImpl.GoodsCatalogService;
 import com.us.example.util.CommonUtil;
+import com.us.example.util.DataJsonValueProcessorUtil;
+import com.us.example.util.DateJsonValueProcessor;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +47,7 @@ public class GoodsCatalogController {
         goodsCatalog.setThumbnail(goodscatalog.getThumbnail());
         goodsCatalogService.saveCatalog(goodsCatalog);
 
-        JSONObject jsonObject = JSONObject.fromObject(goodsCatalog);
+        JSONObject jsonObject = JSONObject.fromObject(goodsCatalog, DataJsonValueProcessorUtil.getDataJsonValueProcessorConf());
         log.info(jsonObject.toString());
 
         return jsonObject.toString();
@@ -57,25 +60,24 @@ public class GoodsCatalogController {
         List<GoodsCatalog> list = goodsCatalogService.getAllCatalog();
 
 
-        for(GoodsCatalog g:list){
-            g.setCreateTime(null);
-
-           if(g.getParantId().equals("0")){
-               g.setChildren(getChildCata(g.getId(),list));
-           }
-        }
-
-
-        for(GoodsCatalog g:list){
-            for(GoodsCatalog gc:g.getChildren()){
-                gc.setChildren(getChildCata(gc.getId(),gc.getChildren()));
-            }
-        }
-
-
+//        for(GoodsCatalog g:list){
+//            g.setCreateTime(null);
+//
+//           if(g.getParantId().equals("0")){
+//               g.setChildren(getChildCata(g.getId(),list));
+//           }
+//        }
+//
+//
+//        for(GoodsCatalog g:list){
+//            for(GoodsCatalog gc:g.getChildren()){
+//                gc.setChildren(getChildCata(gc.getId(),gc.getChildren()));
+//            }
+//        }
 
 
-        JSONArray jatmp =  JSONArray.fromObject(list);
+
+        JSONArray jatmp =  JSONArray.fromObject(list, DataJsonValueProcessorUtil.getDataJsonValueProcessorConf());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("list",jatmp);
         log.info(jsonObject.toString());

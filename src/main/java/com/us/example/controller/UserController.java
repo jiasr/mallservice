@@ -8,7 +8,10 @@ import java.util.Map;
 
 import com.us.example.bean.User;
 import com.us.example.serviceImpl.UserServiceImpl;
+import com.us.example.util.DataJsonValueProcessorUtil;
+import com.us.example.util.DateJsonValueProcessor;
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -35,6 +38,9 @@ public class UserController {
     private static Log log = LogFactory.getLog(UserController.class);
 
 
+
+
+
     @RequestMapping(value = "/add", method = RequestMethod.POST,produces = "application/json")
     @ResponseBody
     public String addUser(HttpServletRequest request) {
@@ -44,7 +50,7 @@ public class UserController {
         user.setCreateTime(new Date());
         userService.saveUser(user);
 
-        JSONObject jsonObject = JSONObject.fromObject(user);
+        JSONObject jsonObject = JSONObject.fromObject(user,DataJsonValueProcessorUtil.getDataJsonValueProcessorConf());
         log.info(jsonObject.toString());
 
         return jsonObject.toString();
@@ -57,7 +63,8 @@ public class UserController {
         List<User> list = userService.getAllUser();
 
 
-        JSONArray ja = JSONArray.fromObject(list);
+
+        JSONArray ja = JSONArray.fromObject(list, DataJsonValueProcessorUtil.getDataJsonValueProcessorConf());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("list",ja);
         log.info(jsonObject.toString());
