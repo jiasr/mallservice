@@ -42,7 +42,7 @@ public class JpaConfig {
         jpaProperties.put("hibernate.ejb.naming_strategy","org.hibernate.cfg.ImprovedNamingStrategy");
         jpaProperties.put("hibernate.jdbc.batch_size",50);
         jpaProperties.put("hibernate.show_sql",true);
-        jpaProperties.put("hibernate.hbm2ddl.auto","create");
+        jpaProperties.put("hibernate.hbm2ddl.auto","update");
 
 
         factory.setJpaPropertyMap(jpaProperties);
