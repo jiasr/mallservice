@@ -1,11 +1,7 @@
-package site.common.persist.dao;
+package com.us.example.persist.dao;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-
 
 
 public interface BaseDao<T,ID extends Serializable>{

@@ -1,9 +1,6 @@
-package site.common.persist;
+package com.us.example.persist;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -17,14 +14,9 @@ public abstract class ManagedIdentityDomainObject<T extends ManagedIdentityDomai
 	@Override
 	@Id
 	@GeneratedValue(generator="hibseq")
-	@GenericGenerator(name="hibseq", strategy = "hilo",
-	    parameters = {
-	        @Parameter(name="max_lo", value = "100")
-	    }
-	)
-
+	@GenericGenerator(name="hibseq", strategy = "uuid")
 	@Column(nullable = false, insertable = false, updatable = false)
-	public Long getId() {
+	public String getId() {
 		return super.id;
 	}
 }

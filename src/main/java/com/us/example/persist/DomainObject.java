@@ -1,8 +1,7 @@
-package site.common.persist;
+package com.us.example.persist;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Random;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
@@ -13,7 +12,7 @@ public abstract class DomainObject<T extends DomainObject<T>> implements
 		Serializable {
 
 	private static final long serialVersionUID = -3348024008311939854L;
-	protected Long id;
+	protected String id;
 
 	public Date getCreateTime() {
 		return createTime;
@@ -26,14 +25,14 @@ public abstract class DomainObject<T extends DomainObject<T>> implements
 	private Date createTime = new Date();
 
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
 	@Transient
 	// @Id
 	// FIXME: When execute GAS3 task, @Id comment must be removed
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 

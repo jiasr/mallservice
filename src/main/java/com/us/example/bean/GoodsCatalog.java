@@ -1,7 +1,7 @@
 package com.us.example.bean;
 
 
-import site.common.persist.ManagedIdentityDomainObject;
+import com.us.example.persist.ManagedIdentityDomainObject;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

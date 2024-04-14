@@ -18,7 +18,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories("com.us.example.dao")
+@EnableJpaRepositories("com.us.example.bean")
 @EnableTransactionManagement
 @ComponentScan
 public class JpaConfig {

@@ -1,4 +1,4 @@
-package site.common.persist;
+package com.us.example.persist;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -10,14 +10,14 @@ public abstract class UnManagedIdentityDomainObject<T extends UnManagedIdentityD
 	private static final long serialVersionUID = 6160839886203552214L;
 
 	@Override
-	public void setId(Long id){
+	public void setId(String id){
 		super.id = id;
 	}
 	
 	@Override
 	@Id
 	@Column(nullable = false)
-	public Long getId() {
+	public String getId() {
 		return super.id;
 	}
 

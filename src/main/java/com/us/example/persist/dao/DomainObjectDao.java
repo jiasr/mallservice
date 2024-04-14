@@ -1,29 +1,13 @@
-package site.common.persist.dao;
+package com.us.example.persist.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.Transient;
 import javax.transaction.Transactional;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
-import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
-import site.common.persist.DomainObject;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.jpa.support.*;
-
-
-import site.common.util.GenericsUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;

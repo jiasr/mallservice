@@ -11,7 +11,6 @@ import com.us.example.serviceImpl.UserServiceImpl;
 import net.sf.json.JSONArray;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.Logger;
 
 import net.sf.json.JSONObject;
 
@@ -28,7 +27,7 @@ import com.us.example.util.CommonUtil;
 @Controller
 @RequestMapping(value = "/users")
 public class UserController {
-    private static final Logger logger = Logger.getLogger(UserController.class);
+    private static final Log logger = LogFactory.getLog(UserController.class);
 
     @Autowired
     private UserServiceImpl userService;
