@@ -1,4 +1,4 @@
-package com.us.example.serviceImpl;
+package com.us.example.service;
 
 import com.us.example.bean.GoodsCatalog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -27,9 +28,19 @@ public class GoodsCatalogService {
         entityManager.persist(catalog);
     }
 
-    public List<GoodsCatalog> getAllCatalog(){
+    public List<GoodsCatalog> getAllCatalog(Map<String, Object> params){
+        // 计算起始位置
+
+        int currentpage =  params.get("currentPage")== null ? 1: Integer.parseInt((String) params.get("currentPage"));
+        int paageSize = params.get("pageSize")== null ? 10: Integer.parseInt((String) params.get("pageSize"));
+        int firstResult = (currentpage - 1) * paageSize;
         TypedQuery<GoodsCatalog> query = entityManager.createQuery("SELECT t FROM GoodsCatalog t", GoodsCatalog.class);
+        // 设置分页参数
+        query.setFirstResult(firstResult);
+        query.setMaxResults(paageSize);
+
         return query.getResultList();
+
     }
 
     public void deleteCatalog(){

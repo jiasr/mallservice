@@ -1,13 +1,11 @@
 package com.us.example.controller;
 
 import com.us.example.bean.GoodsCatalog;
-import com.us.example.serviceImpl.GoodsCatalogService;
+import com.us.example.service.GoodsCatalogService;
 import com.us.example.util.CommonUtil;
 import com.us.example.util.DataJsonValueProcessorUtil;
-import com.us.example.util.DateJsonValueProcessor;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +52,7 @@ public class GoodsCatalogController {
     @ResponseBody
     public String listGoodsCatalog(HttpServletRequest request) {
         Map<String, Object> map = CommonUtil.getParameterMap(request);
-        List<GoodsCatalog> list = goodsCatalogService.getAllCatalog();
+        List<GoodsCatalog> list = goodsCatalogService.getAllCatalog(map);
 
 
 //        for(GoodsCatalog g:list){
