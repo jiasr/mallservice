@@ -36,7 +36,7 @@ public class GoodsCatalogController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST,produces = "application/json")
     @ResponseBody
-    public String addUser(@RequestBody GoodsCatalog goodscatalog) {
+    public String addGoodsCatalog(@RequestBody GoodsCatalog goodscatalog) {
 
         GoodsCatalog goodsCatalog = new GoodsCatalog();
         goodsCatalog.setName(goodscatalog.getName());
@@ -53,7 +53,7 @@ public class GoodsCatalogController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET,produces = "application/json")
     @ResponseBody
-    public String listUser(HttpServletRequest request) {
+    public String listGoodsCatalog(HttpServletRequest request) {
         Map<String, Object> map = CommonUtil.getParameterMap(request);
         List<GoodsCatalog> list = goodsCatalogService.getAllCatalog();
 
@@ -92,6 +92,37 @@ public class GoodsCatalogController {
         }
         return childlist;
     }
+
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE,produces = "application/json")
+    @ResponseBody
+    public String deleteGoodsCatalog(HttpServletRequest request) {
+        Map<String, Object> map = CommonUtil.getParameterMap(request);
+        goodsCatalogService.deleteCatalog();
+
+
+//        for(GoodsCatalog g:list){
+//            g.setCreateTime(null);
+//
+//           if(g.getParantId().equals("0")){
+//               g.setChildren(getChildCata(g.getId(),list));
+//           }
+//        }
+//
+//
+//        for(GoodsCatalog g:list){
+//            for(GoodsCatalog gc:g.getChildren()){
+//                gc.setChildren(getChildCata(gc.getId(),gc.getChildren()));
+//            }
+//        }
+
+        JSONObject jsonObject = new JSONObject();
+        log.info(jsonObject.toString());
+        return jsonObject.toString();
+    }
+
+
+
 
 
 }
