@@ -1,6 +1,7 @@
 package com.us.example.service;
 
 import com.us.example.bean.GoodsCatalog;
+import com.us.example.persist.dao.DomainObjectDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -24,6 +25,9 @@ public class GoodsCatalogService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    DomainObjectDao dao;
+
     public void saveCatalog(GoodsCatalog catalog) {
         entityManager.persist(catalog);
     }
@@ -31,13 +35,17 @@ public class GoodsCatalogService {
     public List<GoodsCatalog> getAllCatalog(Map<String, Object> params){
         // 计算起始位置
 
+
         int currentpage =  params.get("currentPage")== null ? 1: Integer.parseInt((String) params.get("currentPage"));
-        int paageSize = params.get("pageSize")== null ? 10: Integer.parseInt((String) params.get("pageSize"));
-        int firstResult = (currentpage - 1) * paageSize;
+        int pageSize = params.get("pageSize")== null ? 10: Integer.parseInt((String) params.get("pageSize"));
+        int firstResult = (currentpage - 1) * pageSize;
+
+        dao.findpages("mall_goods_catalog","name",GoodsCatalog.class,firstResult,pageSize);
+
         TypedQuery<GoodsCatalog> query = entityManager.createQuery("SELECT t FROM GoodsCatalog t", GoodsCatalog.class);
         // 设置分页参数
         query.setFirstResult(firstResult);
-        query.setMaxResults(paageSize);
+        query.setMaxResults(pageSize);
 
         return query.getResultList();
 
